@@ -67,8 +67,13 @@ public class BookController {
 		}
 	}
 
-	@DeleteMapping("/books/delete")
-	public void deleteBook(long id) {
-
+	@DeleteMapping("/books/delete/{id}")
+	public ResponseEntity<HttpStatus> deleteBookById(@PathVariable long id) {
+		if (bookRepo.existsById(id)) {
+			bookRepo.deleteById(id);
+			return ResponseEntity.status(HttpStatus.OK).build();
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
 }

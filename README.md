@@ -114,7 +114,7 @@ Change the return type to **ResponseEntity<Book>**, which will return
 an **HTTP-Response** object with the book converted to **JSON** and the book object
 will contain the auto-generated **Id**
 
-Use the **@RequestBody** annotation for the book parameter of the method. It lets the 
+Use the **@RequestBody** annotation for the book-parameter of the method. It lets the 
 JPA know that this object must be extracted from the request.
 
 Inside the method I call the save method on the Repository
@@ -124,13 +124,25 @@ Inside the method I call the save method on the Repository
 First of I need to map the method to a URL via **@GetMapping** annotation.
 I map it to **/books/update**
 
-Use the **@RequestBody** annotation for the book parameter of the method. It lets the 
+Use the **@RequestBody** annotation for the book-parameter of the method. It lets the 
 JPA know that this object must be extracted from the request.
 
 Inside the method I commit the changes to the database. If the update has been successful
 the method will return a **ResponseEntity** with the **Book** object and HTTP-Staus **OK**
 Otherwise, the ResponseEntity will be empty and the HTTP-Status will be set to NOT_FOUND
 
+## Add code to deleteBookById method
+
+First of I need to map the method to a URL via **@GetMapping** annotation.
+I map it to **/books/delete/{id}**
+
+Use **@PathVariable** annotation for the id-parameter of the method 
+
+Change the return type to **ResponseEntity<HttpStatus>**, which will return
+an **HTTP-Response** with a respective status
+
+If the book exists, delete it and return an HTTP-Status set to OK.
+If the book does not exist return the HTTP-Status NOT_FOUND.
 
 
 
