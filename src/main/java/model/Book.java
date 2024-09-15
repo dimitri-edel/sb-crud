@@ -1,5 +1,17 @@
 package model;
 
-public class Book {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Entity
+@Table(name = "books")
+@NoArgsConstructor
+@Data
+public class Book {
+	private long id;
+	private String title;
+	private String author;
 }

@@ -35,4 +35,19 @@ spring.datasource.password=*Password*
 
 spring.datasource.driver-class-name=org.postgresql.Driver
 
-#
+# Model
+
+1. I created a package named model.
+2. I created a class named Book, which will will hold data for a book.
+
+## Jakarta persistence annotations
+
+The annotations Entity and Table allow me to skip a lot of boilerplate code for the model.
+They signal to the JPA that this class is an entity and allows me to specify the name of the table that will be created in the database.
+
+## Lombok persistence annotations
+
+*@NoArgsConstrutor* will generate a constructor with now parameters
+*@Data* will will generate getters, setters, equualsTo, toString and a constructor that has all the required fields
+ 
+
