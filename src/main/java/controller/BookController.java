@@ -54,8 +54,17 @@ public class BookController {
 	}
 
 	@PostMapping("/books/update")
-	public void updateBook(Book book) {
-
+	public ResponseEntity<Book> updateBook(@RequestBody Book book) {
+		Optional<Book> bookData = bookRepo.findById(book.getId());
+		if (bookData.isPresent()) {
+			Book obj = bookData.get();
+			obj.setTitle(book.getTitle());
+			obj.setAuthor(book.getAuthor());
+			bookRepo.save(obj);
+			return new ResponseEntity<>(obj, HttpStatus.OK);
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
 	}
 
 	@DeleteMapping("/books/delete")
