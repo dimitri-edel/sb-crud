@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import model.Book;
@@ -47,8 +48,9 @@ public class BookController {
 	}
 
 	@PostMapping("/books/add")
-	public void addBook(Book book) {
-
+	public ResponseEntity<Book> addBook(@RequestBody Book book) {
+		Book obj = bookRepo.save(book);
+		return new ResponseEntity<>(obj, HttpStatus.CREATED);
 	}
 
 	@PostMapping("/books/update")

@@ -42,8 +42,10 @@ spring.datasource.driver-class-name=org.postgresql.Driver
 
 ## Jakarta persistence annotations
 
-The annotations Entity and Table allow me to skip a lot of boilerplate code for the model.
+The annotations **@Entity** and **@Table** allow me to skip a lot of boilerplate code for the model.
 They signal to the JPA that this class is an entity and allows me to specify the name of the table that will be created in the database.
+**@Id** and **@GenerateValue** will declare the field as a unique identifier and let the database engine
+know that it must auto-generate those IDs
 
 ## Lombok persistence annotations
 
@@ -86,7 +88,7 @@ First of I need to map the method to a URL, which thankfully can be done via
 I map it to **/books**
 
 Change the return type to **ResponseEntity<List<Book>>**, which will essentially return
-an **HTTP-Response** object and the list will be converted to **JSON**
+an **HTTP-Response** object with the list will be converted to **JSON**
 
 Inside the method try and retrieve the List from the Repository and relay the results to 
 the consumer, by incorporating status codes in the response entity
@@ -98,10 +100,23 @@ First of I need to map the method to a URL, which thankfully can be done via
 I map it to **/books/{id}**
 
 Change the return type to **ResponseEntity<Book>**, which will return
-an **HTTP-Response** object and the book converted to **JSON**
+an **HTTP-Response** object with the book converted to **JSON**
 
 Inside the method try and retrieve the Book from the Repository and relay the results to 
 the consumer, by incorporating status codes in the response entity
+
+## Add code to addBook method
+
+First of I need to map the method to a URL via **@GetMapping** annotation.
+I map it to **/books/add**
+
+Change the return type to **ResponseEntity<Book>**, which will return
+an **HTTP-Response** object with the book converted to **JSON** and the book object
+will contain the auto-generated **Id**
+
+Inside the method I call the save method on the Repository
+
+
 
 
  
