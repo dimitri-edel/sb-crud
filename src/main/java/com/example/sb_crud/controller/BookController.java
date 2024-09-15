@@ -1,4 +1,4 @@
-package controller;
+package com.example.sb_crud.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import model.Book;
-import repo.BookRepository;
+import com.example.sb_crud.model.Book;
+import com.example.sb_crud.repo.BookRepository;
 
 @RestController
 public class BookController {
+	
 	@Autowired
 	private BookRepository bookRepo;
 

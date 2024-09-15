@@ -144,7 +144,21 @@ an **HTTP-Response** with a respective status
 If the book exists, delete it and return an HTTP-Status set to OK.
 If the book does not exist return the HTTP-Status NOT_FOUND.
 
+## BUG fix #1
+The folder structure does not agree with the spring boot application. I had to put packages: model, controller and repo 
+in sub-packages of sb_crud. 
+Also, I had to add this annotation above the main class **SbCrudApplication**
+<code> 
+@ComponentScan(basePackages = {"com.example.sb_crud.controller", 
+		"com.example.sb_crud.repo", "com.example.sb_crud.model"})
+</code>
 
+Before I did this, I kept getting the message:
+The autowired field bookRepo required a bean of type 'repo.BookRepository' that could not be found.
+Consider defining a bean of type 'repo.BookRepository' in your configuration.
 
+I tried to add the package-names to the **@ComponentScan** annotation but it still wouldn't find them.
+Then I read something on stack overflow that spring boot will always look in the sub-packages, that's why I restructured 
+the packages and it worked.
 
  
