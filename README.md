@@ -48,16 +48,60 @@ They signal to the JPA that this class is an entity and allows me to specify the
 ## Lombok persistence annotations
 
 *@NoArgsConstrutor* will generate a constructor with now parameters
-*@Data* will will generate getters, setters, equualsTo, toString and a constructor that has all the required fields
+**@Data** will will generate getters, setters, equualsTo, toString and a constructor that has all the required fields
  
 # JPA Repository
 
 A Repository provides methods for manipulating data in a database.
 So, instead of writing all the code myself, it is easier to use all the CRUD functionality provided by a JPA Repository.
 
-1. I create a new package named *repo* 
-2. I create an interface named *BookRepository*
+1. I create a new package named **repo** 
+2. I create an interface named **BookRepository**
 3. The Repository has to inherit from (extend) JpaRepository
-4. Annotate the interface with *@Repository* tag
+4. Annotate the interface with **@Repository** tag
 
 .. and I'm done!
+
+# Controller
+
+Create a new package named controller
+Create a new class named BookController inside the package
+Annotate the class with **@RestController**
+
+Declare a property of type BookRepository inside the class. 
+Annotate the property with **@Autowired**, which will inject and instantiate the Repository.
+
+Add the following methods to the controller:
+
+public List<Book> **getAllBooks()**
+public void **addBook(Book book)**		C
+public Book **getBookById(long id)**	R
+public void **updateBook(Book book)**	U
+public void **deleteBook(long id)**		D
+
+## Add code to getAllBooks method
+
+First of I need to map the method to a URL, which thankfully can be done via
+**@GetMapping** annotation.
+I map it to **/books**
+
+Change the return type to **ResponseEntity<List<Book>>**, which will essentially return
+an **HTTP-Response** object and the list will be converted to **JSON**
+
+Inside the method try and retrieve the List from the Repository and relay the results to 
+the consumer, by incorporating status codes in the response entity
+
+## Add code to getBookById method
+
+First of I need to map the method to a URL, which thankfully can be done via
+**@GetMapping** annotation.
+I map it to **/books/{id}**
+
+Change the return type to **ResponseEntity<Book>**, which will return
+an **HTTP-Response** object and the book converted to **JSON**
+
+Inside the method try and retrieve the Book from the Repository and relay the results to 
+the consumer, by incorporating status codes in the response entity
+
+
+ 
