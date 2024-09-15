@@ -50,4 +50,14 @@ They signal to the JPA that this class is an entity and allows me to specify the
 *@NoArgsConstrutor* will generate a constructor with now parameters
 *@Data* will will generate getters, setters, equualsTo, toString and a constructor that has all the required fields
  
+# JPA Repository
 
+A Repository provides methods for manipulating data in a database.
+So, instead of writing all the code myself, it is easier to use all the CRUD functionality provided by a JPA Repository.
+
+1. I create a new package named *repo* 
+2. I create an interface named *BookRepository*
+3. The Repository has to inherit from (extend) JpaRepository
+4. Annotate the interface with *@Repository* tag
+
+.. and I'm done!
