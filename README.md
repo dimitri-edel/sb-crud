@@ -162,3 +162,11 @@ Then I read something on stack overflow that spring boot will always look in the
 the packages and it worked.
 
  
+# Testing with POSTMAN
+I tested all the endpoints with postman and they all worked just fine. All CRUD-Operations worked and the data was 
+manipulated accordingly in the database. Also, all the HTTP-Status codes were correct, including NO_CONTENT, NOT_FOUND, INTERNAL_SERVER_ERROR and CREATED
+
+# Automated Tests with JUnit
+
+I use Mockito for mocking the BookRepository and  BookController
+The code is well commented.
