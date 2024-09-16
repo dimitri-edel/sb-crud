@@ -1,7 +1,5 @@
 package com.example.sb_crud.test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,7 +30,7 @@ import static org.hamcrest.Matchers.hasSize;
 class TestBookController {
 	@Autowired
 	MockMvc mockMvc;
-	
+
 	// Create objects to convert Java objects to JSON and vice versa
 	ObjectMapper objectMapper = new ObjectMapper();
 	ObjectWriter objectWriter = objectMapper.writer();
@@ -46,29 +44,42 @@ class TestBookController {
 	Book book1 = new Book(1, "Java Programming", "John Doe");
 	Book book2 = new Book(2, "Python Programming", "Jane Doe");
 	Book book3 = new Book(3, "C Programming", "James Doe");
-	
+
 	@BeforeEach
 	void setUp() throws Exception {
-		// Ensure that Mockito annotations are initialized and the mockMvc object is created
-		// so that a mock of the BookController object can be used for testing		
+		// Ensure that Mockito annotations are initialized and the mockMvc object is
+		// created
+		// so that a mock of the BookController object can be used for testing
 		this.mockMvc = MockMvcBuilders.standaloneSetup(bookController).build();
 	}
-	
+
 	@Test
-    void testGetAllBooksSuccess() throws Exception {
-        // Create a list of books and add data to the list
-        List<Book> books = new ArrayList<>(Arrays.asList(book1, book2, book3));
-        // Mock repository
-        Mockito.when(bookRepository.findAll()).thenReturn(books);
-        // Emulate a GET request to the /books endpoint
-        // Verify that the response status is 200 OK
-        // Verify that the response has a size of 3
-        // Verify that the title of the third book is "C Programming"
-        mockMvc.perform(MockMvcRequestBuilders
-            .get("/books")
-            .contentType(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(jsonPath("$", hasSize(3)))
-            .andExpect(jsonPath("$[2].title", is("C Programming")));
-    }
+	void testGetAllBooksSuccess() throws Exception {
+		// Create a list of books and add data to the list
+		List<Book> books = new ArrayList<>(Arrays.asList(book1, book2, book3));
+		// Mock repository
+		Mockito.when(bookRepository.findAll()).thenReturn(books);
+		// Emulate a GET request to the /books endpoint
+		// Verify that the response status is 200 OK
+		// Verify that the response has a size of 3
+		// Verify that the title of the third book is "C Programming"
+		mockMvc.perform(MockMvcRequestBuilders.get("/books").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(jsonPath("$", hasSize(3)))
+				.andExpect(jsonPath("$[0].title", is("Java Programming")))
+				.andExpect(jsonPath("$[1].title", is("Python Programming")))
+				.andExpect(jsonPath("$[2].title", is("C Programming")));
+	}
+
+	// Create a test method to test the getBookById method
+	@Test
+	void testGetBookByIdSuccess() throws Exception {
+		// Mock repository
+		Mockito.when(bookRepository.findById(1L)).thenReturn(java.util.Optional.of(book1));
+		// Emulate a GET request to the /books/1 endpoint
+		// Verify that the response status is 200 OK
+		// Verify that the title of the first book is "Java Programming"
+		mockMvc.perform(MockMvcRequestBuilders.get("/books/1").contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk()).andExpect(jsonPath("$.title", is("Java Programming")));
+		
+	}
 }
