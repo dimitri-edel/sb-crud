@@ -51,6 +51,7 @@ class TestBookController {
 		// created
 		// so that a mock of the BookController object can be used for testing
 		this.mockMvc = MockMvcBuilders.standaloneSetup(bookController).build();
+
 	}
 
 	@Test
@@ -80,6 +81,6 @@ class TestBookController {
 		// Verify that the title of the first book is "Java Programming"
 		mockMvc.perform(MockMvcRequestBuilders.get("/books/1").contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk()).andExpect(jsonPath("$.title", is("Java Programming")));
-		
+
 	}
 }

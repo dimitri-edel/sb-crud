@@ -25,15 +25,37 @@ Click on *GENERATE*, and a ZIP-file will be downloaded to the download folder of
 3. Edit application properties and add your data base credentials and driver to /src/main/resources/application.properties
 as follows:
 
+<code>
+
 spring.application.name=*name of application*
 
-spring.datasource.url=jdbc:postgresql: //hostname or IP::port number/name of database (Like //212.217.152.54:5432/sb-crud
+spring.datasource.url=jdbc:postgresql: //hostname or IP:port number/name of database (Like //212.217.152.54:5432/sb-crud
 
 spring.datasource.username=*username*
 
 spring.datasource.password=*Password*
 
 spring.datasource.driver-class-name=org.postgresql.Driver
+
+// The settings below can be copied
+ 
+spring.jpa.show-sql=true
+
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+
+// Let JPA create, delete, update automatically
+ 
+spring.jpa.hibernate.ddl-auto=update
+
+spring.jh2.console.enabled=true
+
+spring.h2.console.path=/h2-console
+
+// Generate log file
+ 
+logging.file.name=logs/app.log
+
+</code>
 
 # Model
 
